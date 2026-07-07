@@ -1,0 +1,7 @@
+# Дообучение (warm-start от продакшен-головы)
+mode: finetune
+epochs: 400
+select_by: macro_f1
+init_head: checkpoints/clip_probe_vlm6_oss.pt
+finetune_lr: 0.003
+save: checkpoints/clip_probe_finetuned.pt

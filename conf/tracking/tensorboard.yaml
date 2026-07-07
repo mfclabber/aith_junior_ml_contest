@@ -1,0 +1,3 @@
+# TensorBoard (по умолчанию)
+backends: [tensorboard]
+project: jmlc-utt-classifier

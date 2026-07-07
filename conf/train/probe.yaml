@@ -1,0 +1,7 @@
+# Линейный пробинг с нуля
+mode: probe
+epochs: 300
+select_by: macro_f1     # acc | macro_f1 | balanced_f1
+init_head: null         # путь к чекпойнту для warm-start
+finetune_lr: 0.003
+save: checkpoints/clip_probe_vlm6_oss.pt

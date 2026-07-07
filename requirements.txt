@@ -1,0 +1,19 @@
+# Базовые зависимости: веб-приложение + ML-инференс (CLIP probe)
+# Установка: pip install -r requirements.txt
+
+# Web UI + гео
+flask>=3.0
+geopandas>=1.0
+pyogrio>=0.9
+
+# ML-инференс
+torch>=2.2
+torchvision
+open-clip-torch
+numpy
+pillow>=10.0
+
+# Сбор данных
+requests
+aiohttp
+progressbar2

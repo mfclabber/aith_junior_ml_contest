@@ -1,0 +1,26 @@
+{
+  "class_mapping": {
+    "natural_areas": 0,
+    "low_density_degraded": 1,
+    "underused_infrastructure": 2,
+    "frozen_construction": 3,
+    "active_construction": 4,
+    "active_urban": 5
+  },
+  "dataset_info": {
+    "source": "demo_subset_for_ci",
+    "note": "Мини-выборка для make pipeline-quick без полного data/"
+  },
+  "train_samples": [
+    {"image_path": "crops/natural_areas/demo_1.jpg", "class_name": "natural_areas", "class_id": 0, "object_id": "demo_1"},
+    {"image_path": "crops/natural_areas/demo_1.jpg", "class_name": "natural_areas", "class_id": 0, "object_id": "demo_1b"},
+    {"image_path": "crops/active_urban/demo_2.jpg", "class_name": "active_urban", "class_id": 5, "object_id": "demo_2"},
+    {"image_path": "crops/active_urban/demo_2.jpg", "class_name": "active_urban", "class_id": 5, "object_id": "demo_2b"},
+    {"image_path": "crops/natural_areas/demo_1.jpg", "class_name": "natural_areas", "class_id": 0, "object_id": "demo_3"},
+    {"image_path": "crops/active_urban/demo_2.jpg", "class_name": "active_urban", "class_id": 5, "object_id": "demo_4"}
+  ],
+  "val_samples": [
+    {"image_path": "crops/natural_areas/demo_1.jpg", "class_name": "natural_areas", "class_id": 0, "object_id": "demo_v1"},
+    {"image_path": "crops/active_urban/demo_2.jpg", "class_name": "active_urban", "class_id": 5, "object_id": "demo_v2"}
+  ]
+}

@@ -1,0 +1,3 @@
+# CLIP ViT-B-32 (лёгкий, для CPU/CI)
+name: ViT-B-32
+pretrained: laion2b_s34b_b79k

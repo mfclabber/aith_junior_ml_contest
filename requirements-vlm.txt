@@ -1,0 +1,9 @@
+# Опциональный тяжёлый стек: VLM fine-tuning (PaliGemma LoRA) + zero-shot
+# Установка: pip install -r requirements-vlm.txt
+transformers>=4.50
+peft>=0.11
+accelerate>=0.30
+sentencepiece
+torch>=2.2
+pillow
+numpy

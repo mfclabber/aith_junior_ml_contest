@@ -1,0 +1,18 @@
+# Корневой конфиг Hydra. Композиция: data + model + train + tracking.
+# Переопределение из CLI:
+#   python scripts/train.py model=vit_b32 data=demo tracking=tensorboard train.epochs=100
+defaults:
+  - data: vlm6
+  - model: vit_l14
+  - train: probe
+  - tracking: tensorboard
+  - _self_
+
+# Общие пути
+paths:
+  data_dir: data/ml_perspective
+  runs_dir: runs
+  checkpoint_dir: checkpoints
+
+seed: 42
+device: cuda

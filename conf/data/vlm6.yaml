@@ -1,0 +1,7 @@
+# Продакшен-датасет: VLM content-метки, 6 классов UTT
+name: vlm6
+metadata: data/ml_perspective/metadata_perspective_vlm6_oss.json
+data_dir: data/ml_perspective
+group: "6"          # 6 | 5 | 3
+bottom_crop: 1.0    # доля нижней части кадра (1.0 = весь кадр)
+val_cap: 35         # cap на класс для balanced macro-F1

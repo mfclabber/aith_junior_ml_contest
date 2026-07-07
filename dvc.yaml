@@ -1,0 +1,62 @@
+# DVC-пайплайн: декларативное описание стадий проекта.
+# Запуск: dvc repro   (пересобирает только изменённые стадии по хэшам deps)
+# Граф:  dvc dag
+stages:
+  collect:
+    cmd: bash scripts/pipeline/01_collect_data.sh
+    deps:
+      - scripts/pipeline/01_collect_data.sh
+      - scripts/data_collection
+    outs:
+      - data/ml_perspective/raw:
+          persist: true
+
+  eda:
+    cmd: bash scripts/pipeline/02_eda_audit.sh
+    deps:
+      - scripts/pipeline/02_eda_audit.sh
+      - data/ml_perspective/raw
+
+  clean:
+    cmd: bash scripts/pipeline/03_clean_and_balance.sh
+    deps:
+      - scripts/pipeline/03_clean_and_balance.sh
+      - data/ml_perspective/raw
+    outs:
+      - data/ml_perspective/metadata_perspective_clean.json:
+          persist: true
+
+  vlm_relabel:
+    cmd: bash scripts/pipeline/04_vlm_relabel.sh
+    deps:
+      - scripts/pipeline/04_vlm_relabel.sh
+      - data/ml_perspective/metadata_perspective_clean.json
+    outs:
+      - data/ml_perspective/metadata_perspective_vlm6_oss.json:
+          persist: true
+
+  train:
+    cmd: bash scripts/pipeline/05_train_probe.sh
+    deps:
+      - scripts/pipeline/05_train_probe.sh
+      - scripts/training/linear_probe_clip.py
+      - conf
+      - data/ml_perspective/metadata_perspective_vlm6_oss.json
+    outs:
+      - checkpoints/clip_probe_vlm6_oss.pt:
+          persist: true
+
+  evaluate:
+    cmd: bash scripts/pipeline/06_evaluate.sh
+    deps:
+      - scripts/pipeline/06_evaluate.sh
+      - checkpoints/clip_probe_vlm6_oss.pt
+    metrics:
+      - results/metrics.json:
+          cache: false
+
+  report:
+    cmd: bash scripts/pipeline/07_report.sh
+    deps:
+      - scripts/pipeline/07_report.sh
+      - results/metrics.json

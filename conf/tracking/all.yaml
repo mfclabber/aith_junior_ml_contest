@@ -1,0 +1,3 @@
+# Все бэкенды сразу: TensorBoard + W&B + MLflow
+backends: [tensorboard, wandb, mlflow]
+project: jmlc-utt-classifier

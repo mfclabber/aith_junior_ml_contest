@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <title>Снимки участка {{ parcel_key }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"/>
+  <style>
+    body { max-width: 960px; margin: 20px auto; padding: 0 16px; }
+    .snap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .snap-card img { width: 100%; border-radius: 8px; border: 1px solid #d8dce6; }
+    .snap-card h3 { margin: 0 0 8px; font-size: 0.95rem; }
+    .snap-card a { font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <p><a href="/">← К классификатору</a></p>
+  <h1>Снимки участка {{ parcel_key }}</h1>
+  <p class="muted">Панорамы с граней участка (кроп «вид на участок»). Датасет: {{ dataset_id }}</p>
+  {% if not files %}
+  <p>Снимки ещё не сгенерированы. Откройте участок в основном интерфейсе и повторите загрузку.</p>
+  {% else %}
+  <div class="snap-grid">
+    {% for f in files %}
+    <article class="snap-card card">
+      <h3>{{ f.label }}</h3>
+      <img src="{{ f.url }}" alt="{{ f.label }}" loading="lazy"/>
+      <p><a href="{{ f.yandex_url }}" target="_blank" rel="noopener">Панорама на Яндекс.Картах (точка съёмки)</a></p>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
+</body>
+</html>

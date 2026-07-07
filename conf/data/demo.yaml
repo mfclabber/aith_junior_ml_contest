@@ -1,0 +1,7 @@
+# Мини-датасет для CI и smoke-прогонов (CPU)
+name: demo
+metadata: data/demo/metadata_demo.json
+data_dir: data/demo
+group: "6"
+bottom_crop: 1.0
+val_cap: 35

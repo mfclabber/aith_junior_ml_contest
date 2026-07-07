@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Классификатор улиц</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/leaflet/leaflet.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}"/>
+</head>
+<body>
+<header class="app-header">
+  <h1>Классификатор улиц</h1>
+</header>
+
+<section class="panel card">
+  <h2 class="panel-title">Исходные данные</h2>
+  <div class="toolbar">
+    <label class="btn secondary file-browse-btn">
+      Обзор…
+      <input type="file" id="fileInput" accept=".gpkg"/>
+    </label>
+    <span id="fileName" class="file-name">Участки.gpkg — выберите файл</span>
+    <button type="button" class="btn icon-btn" id="btnRun" title="Запуск классификации" disabled>▶</button>
+    <button type="button" class="btn icon-btn ghost" id="btnReset" title="Сброс">↺</button>
+    <label class="chk"><input type="checkbox" id="overwriteAll"/> Перезаписать все классы</label>
+  </div>
+  <div class="status-row">
+    <span id="statusText">Статус: ожидание файла</span>
+    <span class="muted" id="modeHint">Режим: ML (CLIP probe, 6 классов)</span>
+    <div class="progress-wrap">
+      <progress id="progressBar" max="100" value="0"></progress>
+    </div>
+    <button type="button" class="btn secondary" id="btnExport">Экспорт CSV</button>
+    <button type="button" class="btn secondary" id="btnExportGpkg">Экспорт GPKG</button>
+  </div>
+</section>
+
+<section class="viz-stack">
+  <div class="panel card map-panel">
+    <h2 class="panel-title">Визуализация</h2>
+    <div id="map"></div>
+  </div>
+
+  <section class="panel card gallery-panel">
+    <h2 class="panel-title">Панорама участка</h2>
+    <div class="gallery-controls">
+      <button type="button" class="btn secondary" id="btnPanoCollapse">Свернуть панорамы</button>
+      <button type="button" class="btn secondary" id="btnPanoFullscreen">На весь экран</button>
+      <label class="zoom pano-zoom-ctl">
+        <span class="muted">Зум</span>
+        <input type="range" id="panoZoom" min="100" max="260" step="5" value="100"/>
+        <span class="muted" id="panoZoomVal">100%</span>
+      </label>
+    </div>
+    <div id="gallery" class="gallery"></div>
+    <p class="hint" id="galleryHint">Выберите строку в отчёте или полигон на карте.</p>
+  </section>
+</section>
+
+<section class="panel card">
+  <h2 class="panel-title">Отчёт <span id="reportTitle" class="muted"></span></h2>
+  <div class="table-wrap">
+    <table id="report">
+      <thead>
+        <tr>
+          <th>ID участка</th>
+          <th>Класс</th>
+          <th>Подкласс</th>
+          <th>Откорректированный класс</th>
+          <th>Откорректированный подкласс</th>
+          <th>Панорама</th>
+          <th>Снимки</th>
+          <th>Описание (исходное)</th>
+          <th>Кадастровый номер</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+<script src="{{ url_for('static', filename='vendor/leaflet/leaflet.js') }}"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

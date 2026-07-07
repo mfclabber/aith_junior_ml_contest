@@ -1,0 +1,10 @@
+services:
+  classifier:
+    build: .
+    ports:
+      - "8765:8765"
+    environment:
+      CLASSIFIER_MODE: heuristic
+      CLASSIFY_REQUIRE_PANORAMA: "0"
+    volumes:
+      - ./web_app/uploads:/app/web_app/uploads

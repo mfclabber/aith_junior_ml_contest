@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+venv/
+.venv/
+
+# IDE / OS
+.idea/
+.vscode/
+.cursor/
+.DS_Store
+
+# Данные и веса (кроме demo)
+data/*
+!data/demo/
+checkpoints/
+web_app/uploads/
+
+# Логи и секреты
+*.log
+.env
+
+# MLOps: трекинг и Hydra
+runs/
+mlruns/
+wandb/
+outputs/
+multirun/
+.hydra/
+
+# Локальные артефакты
+*.gpkg
+results/*.json
