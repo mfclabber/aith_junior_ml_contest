@@ -47,7 +47,6 @@ flowchart LR
   C --> D[VLM-разметка]
   D --> E[CLIP linear probe]
   E --> F[Оценка + веб-UI]
-  F --> G[LangGraph-агент]
 ```
 
 Отдельно стоит отметить два решения, которые заметно повлияли на качество:
@@ -99,7 +98,6 @@ make pipeline                         # весь конвейер (нужны д
 | Обучение через Hydra + трекинг | `make train-cfg` |
 | Оценка чекпойнтов | `make eval` |
 | Веб-интерфейс с ML | `make serve` |
-| Автономный агент | `make agent` |
 | Docker | `make docker` (UI на `http://127.0.0.1:8765`) |
 
 ## Результаты
@@ -126,12 +124,6 @@ make pipeline                         # весь конвейер (нужны д
 | CLIP probe на OSM-метках | 0.27 |
 | **CLIP probe на VLM-метках (продакшен)** | **0.76** |
 | CLIP probe, 3 макро-класса | 0.82 |
-
-Честная оговорка: на полном московском GPKG простая текстовая эвристика даёт
-87.6% — выше, чем ML. Так и должно быть, потому что текст GPKG уже содержит сильные
-подсказки, а модель обучалась на другом распределении (domain shift). ML ценен там,
-где текст бессилен — например, на кластере «зелень во дворах», где класс различим
-только по панораме. Разбор метрик и ограничений — в [`docs/METRICS.md`](docs/METRICS.md).
 
 ## MLOps
 
@@ -165,7 +157,6 @@ make board   # дашборд на http://localhost:6006
 │   ├── data_quality/        # EDA, чистка, VLM-разметка
 │   ├── training/            # CLIP probe, ансамбли, трекинг
 │   ├── eval/                # бенчмарки, сравнение с GPKG
-│   └── agent/               # автономный LangGraph-агент
 ├── tests/                   # pytest (запускается в CI)
 ├── docs/                    # архитектура, EDA, метрики, продукт, MLOps
 ├── presentation/            # презентация для конкурса
@@ -179,8 +170,7 @@ make board   # дашборд на http://localhost:6006
 - **Data Science** — EDA и аудит данных, чистка, VLM-переразметка, честная
   валидация со сплитом по `object_id` ([`docs/EDA.md`](docs/EDA.md),
   [`docs/METRICS.md`](docs/METRICS.md)).
-- **Применение ИИ** — CLIP linear probe, VLM weak supervision и автономный
-  LangGraph-агент (`scripts/agent/`).
+- **Применение ИИ** — CLIP linear probe, VLM weak supervision (`scripts/agent/`).
 - **Продуктовое мышление** — веб-инструмент для аналитиков с правками и экспортом
   в GPKG, цикл обратной связи ([`docs/PRODUCT.md`](docs/PRODUCT.md)).
 - **Мотивация** — сопроводительные документы в [`submission/`](submission/).
