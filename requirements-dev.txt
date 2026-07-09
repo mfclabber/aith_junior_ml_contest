@@ -19,3 +19,6 @@ rich>=13.0
 # Автономный агент (LangGraph)
 langgraph>=0.2
 langchain-core>=0.3
+
+# Сборка презентации
+python-pptx>=0.6
