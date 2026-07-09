@@ -19,6 +19,7 @@ COPY Makefile ./
 ENV CLASSIFIER_MODE=heuristic
 ENV CLASSIFY_REQUIRE_PANORAMA=0
 ENV PYTHONUNBUFFERED=1
+ENV FLASK_PORT=8765
 
 EXPOSE 8765
 HEALTHCHECK --interval=30s --timeout=5s CMD python -c "from web_app.app import app" || exit 1
